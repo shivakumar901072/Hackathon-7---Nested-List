@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import "./../styles/App.css";
+import Citites from "./Cities";
 
 // Do not alter the states const and values inside it.
 const states = [
@@ -155,7 +156,29 @@ const states = [
 ];
 
 function App() {
-  return <div id="main"></div>;
+  return (
+    <div id="main">
+      <ul>
+        {states.map((state, index) => {
+          const [showCity, setshowCity] = useState(false);
+          const showCityhandler = (event) => {
+            event.stopPropagation();
+            setshowCity(!showCity);
+          };
+          return (
+            <ul
+              onClick={(event) => showCityhandler(event)}
+              id={`state${index + 1}`}
+              key={index}
+            >
+              {state.name}
+              <Citites show={showCity} state={state} />
+            </ul>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
 
 export default App;
